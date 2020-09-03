@@ -32,9 +32,9 @@ class Car(object):
             
     def save(self):
         df = pd.DataFrame(self.data, columns=['ir_L', 'ir_R', 'degree']) 
-        self.path = '../data/data.csv'
+        self.path = '/home/pi/workspace/ai-contents-maze-runner/data/data.csv'
         if not os.path.exists(self.path):
-            df.to_csv(self.path, index=False, mode='w')
+            df.to_csv(self.path, index=False, mode='w', header=True)
         else:
             df.to_csv(self.path, index=False, mode='a', header=False)
         #df.to_csv(self.path, sep=',')
