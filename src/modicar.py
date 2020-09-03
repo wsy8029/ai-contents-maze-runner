@@ -34,10 +34,11 @@ class Car(object):
         df = pd.DataFrame(self.data, columns=['ir_L', 'ir_R', 'degree']) 
         self.path = '/home/pi/workspace/ai-contents-maze-runner/data/data.csv'
         if not os.path.exists(self.path):
-            df.to_csv(self.path, index=False, mode='w', header=True)
+            df.to_csv(self.path, index=False, mode='a')
         else:
             df.to_csv(self.path, index=False, mode='a', header=False)
         #df.to_csv(self.path, sep=',')
+        time.sleep(3)
         
     def collect_data(self, mot, ir1, ir2, btn, dial):
         while True:
@@ -46,12 +47,12 @@ class Car(object):
                 clear_output(wait=True)
                 self.save()
                 print("데이터를 저장했습니다. 데이터 수집을 종료합니다.")
-                time.sleep(0.1)
+                time.sleep(3)
                 break
                 
             print("데이터 수집을 시작하려면 버튼을 한번 클릭하세요. ", 
                   "데이터를 저장하고 종료하려면 버튼을 더블클릭하세요.", end='\r')
-            time.sleep(0.1)
+            time.sleep(0.2)
             
             if btn.clicked:
                 clear_output(wait=True)
