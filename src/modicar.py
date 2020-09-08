@@ -2,6 +2,7 @@ import time
 import pandas as pd
 from IPython.display import clear_output
 import os
+import tensorflow as tf
 
 class Car(object):
     def __init__(self):
@@ -87,6 +88,8 @@ class Car(object):
                         print("데이터 수집이 중지되었습니다.")
                         break
             clear_output(wait=True)
+
+            
                         
                 
         
