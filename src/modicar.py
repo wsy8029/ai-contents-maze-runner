@@ -71,6 +71,16 @@ class Car(object):
                 while True:
                     degree_original = dial.degree
                     self.run(mot, ir1, ir2, degree_original)
+                    ir_L = ir1.proximity
+                    ir_R = ir2.proximity
+                    tmp = []
+                    tmp.append([ir_L, ir_R, degree_original])
+                    df = pd.DataFrame(tmp, columns=['ir_L', 'ir_R', 'degree'])
+                    df.to_csv('/home/pi/workspace/ai-contents-maze-runner/data/data.csv', index=False, mode='a', header=False)
+#                     with open('/home/pi/workspace/ai-contents-maze-runner/data/data.csv','a') as fd:
+#                         tmp = []
+#                         tmp.append([ir1, ir2, degree_original])
+#                         fd.write(tmp)
                     
                     if btn.clicked:
                         mot.speed = 0,0
