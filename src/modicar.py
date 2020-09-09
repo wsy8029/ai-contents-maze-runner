@@ -113,6 +113,11 @@ class Car(object):
             data = [ir_L, ir_R, ir_RL, ir_LR]
 
             degree = model.predict([[data]])[0][0]
+            data1 = []
+            data1.append([ir_L, ir_R, degree])
+            df = pd.DataFrame(data1, columns=['ir_L', 'ir_R', 'degree'])
+            df.to_csv('/home/pi/workspace/ai-contents-maze-runner/data/data_inference.csv', index=False, mode='a', header=False)
+
             if degree > 30:
                 degree += 5
             else:
