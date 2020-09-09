@@ -17,6 +17,7 @@ class Model(object):
         
     
     def set_data(self):
+        print("[Split dataset for training..]")
         df_inputs = self.df.loc[:,['ir_L', 'ir_R', 'ir_R-L', 'ir_L/R']]
         df_outputs = self.df.loc[:,['degree']]
         
@@ -32,6 +33,7 @@ class Model(object):
         self.outputs_train, self.outputs_test, self.outputs_validate = np.split(outputs, [TRAIN_SPLIT, TEST_SPLIT])
         
     def train(self):
+        print("[Start Training..]")
         self.model = tf.keras.Sequential()
         self.model.add(tf.keras.Input(shape = self.inputs_train.shape[1]))
         self.model.add(tf.keras.layers.Dense(50, activation='relu'))
@@ -57,7 +59,7 @@ class Model(object):
         
         
     def feature_engineering(self):
-        
+        print("[Feature Engineering..]")
         # Extract motor speed from dial degree
         def chdeg(degree_original):
             degree = ((degree_original - 50)*1.5)//1

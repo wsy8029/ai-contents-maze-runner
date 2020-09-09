@@ -113,10 +113,8 @@ class Car(object):
             data = [ir_L, ir_R, ir_RL, ir_LR]
 
             degree = model.predict([[data]])[0][0]
-            if degree > 30:
-                degree += 5
-            else:
-                degree -= 5
+            if degree < 30:
+                degree += 10
                 
             if degree >= 100:
                 degree = 100
