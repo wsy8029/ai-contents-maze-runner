@@ -6,6 +6,8 @@ import tensorflow as tf
 from train import Model
 import modi
 from datetime import datetime
+import numpy as np
+from sklearn.externals import joblib
 
 class Car(object):
     def __init__(self, bundle):
@@ -68,12 +70,16 @@ class Car(object):
         
         
     def run(self):
+         
+        # pickled binary file 형태로 저장된 객체를 로딩한다 
+        file_name = '/home/pi/workspace/ai-contents-maze-runner/model/rf.pkl' 
+        model = joblib.load(file_name) 
         
         while True:
             time.sleep(0.01)
             ir1 = self.ir1.proximity
             ir2 = self.ir2.proximity
-            pred = rf.predict([[ir1, ir2, ir1-ir2, ir1/ir2]])
+            pred = model.predict([[ir1, ir2, ir1-ir2, ir1/ir2]])
             
             if pred[0] == 1:
                 left_fast()
