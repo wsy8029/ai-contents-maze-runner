@@ -5,6 +5,7 @@ import os
 import tensorflow as tf
 from train import Model
 import modi
+from datetime import datetime
 
 class Car(object):
     def __init__(self, bundle):
@@ -57,9 +58,9 @@ class Car(object):
                         ir_L = self.ir1.proximity
                         ir_R = self.ir2.proximity
                         tmp = []
-                        tmp.append([ir_L, ir_R, self.degree])
-                        df = pd.DataFrame(tmp, columns=['ir_L', 'ir_R', 'degree'])
-                        df.to_csv('/home/pi/workspace/ai-contents-maze-runner/data/data_new.csv', index=False, mode='a', header=False)
+                        tmp.append([ir_L, ir_R, self.degree, datetime.now().time()])
+                        df = pd.DataFrame(tmp, columns=['ir_L', 'ir_R', 'degree', 'time'])
+                        df.to_csv('/home/pi/workspace/ai-contents-maze-runner/data/data_new1.csv', index=False, mode='a', header=False)
 
             elif btn.double_clicked:
                 print("데이터 수집을 종료합니다.")
@@ -131,8 +132,8 @@ class Car(object):
                     ir_L = ir1.proximity
                     ir_R = ir2.proximity
                     tmp = []
-                    tmp.append([ir_L, ir_R, degree_original])
-                    df = pd.DataFrame(tmp, columns=['ir_L', 'ir_R', 'degree'])
+                    tmp.append([ir_L, ir_R, degree_original, datetime.now()])
+                    df = pd.DataFrame(tmp, columns=['ir_L', 'ir_R', 'degree', 'time'])
                     df.to_csv('/home/pi/workspace/ai-contents-maze-runner/data/data.csv', index=False, mode='a', header=False)
 #                     with open('/home/pi/workspace/ai-contents-maze-runner/data/data.csv','a') as fd:
 #                         tmp = []
