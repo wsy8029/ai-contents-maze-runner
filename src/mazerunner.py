@@ -4,4 +4,4 @@ import modi
 bundle = modi.MODI()
 car = Car(bundle)
 # car.collect_data()
-car.run()
+# car.run()

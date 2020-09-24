@@ -1,15 +1,17 @@
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.externals import joblib
+# from sklearn.externals import joblib
+import joblib
+
 
 class Model(object):
-    def __init__(self,csv):
-        
+    def __init__(self):
+        pass
         
 
     def train(self):
-        df = pd.read_csv("../data/data_new1.csv")
+        df = pd.read_csv("/home/pi/workspace/ai-contents-maze-runner/data/data_new4.csv")
         df['ir_1-2'] = df['ir1'] - df['ir2']
         df['ir_1/2'] = df['ir1'] / df['ir2']
 

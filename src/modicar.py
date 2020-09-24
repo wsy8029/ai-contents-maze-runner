@@ -7,7 +7,7 @@ from train import Model
 import modi
 from datetime import datetime
 import numpy as np
-from sklearn.externals import joblib
+import joblib
 
 class Car(object):
     def __init__(self, bundle):
@@ -62,7 +62,7 @@ class Car(object):
                         tmp = []
                         tmp.append([ir_L, ir_R, self.degree, datetime.now().time()])
                         df = pd.DataFrame(tmp, columns=['ir_L', 'ir_R', 'degree', 'time'])
-                        df.to_csv('/home/pi/workspace/ai-contents-maze-runner/data/data_new1.csv', index=False, mode='a', header=False)
+                        df.to_csv('/home/pi/workspace/ai-contents-maze-runner/data/data_new4.csv', index=False, mode='a', header=False)
 
             elif btn.double_clicked:
                 print("데이터 수집을 종료합니다.")
@@ -81,18 +81,22 @@ class Car(object):
             time.sleep(0.01)
             ir1 = self.ir1.proximity
             ir2 = self.ir2.proximity
-            pred = rfmodel.predict([[ir1, ir2, ir1-ir2, ir1/ir2]])
-            
-            if pred[0] == 1:
-                left_fast()
-            elif pred[0] == 2:
-                left_slow()
-            elif pred[0] == 3:
-                straight()
-            elif pred[0] == 4:
-                right_slow()
-            elif pred[0] == 5:
-                right_fast()
+            if ir2 == 0:
+                pass
+            else:
+                pred = rfmodel.predict([[ir1, ir2, ir1-ir2, ir1/ir2]])
+                print("예측값 : ",pred)
+
+                if pred[0] == 1:
+                    self.left_fast()
+                elif pred[0] == 2:
+                    self.left_slow()
+                elif pred[0] == 3:
+                    self.straight()
+                elif pred[0] == 4:
+                    self.right_slow()
+                elif pred[0] == 5:
+                    self.right_fast()
                 
         
             
