@@ -110,12 +110,6 @@ class Car(object):
         #df.to_csv(self.path, sep=',')
         time.sleep(3)
         
-     
-    def learn(self):
-        self.m = Model("/home/pi/workspace/ai-contents-maze-runner/data/data.csv")
-        self.m.feature_engineering()
-        self.m.set_data()
-        self.m.train()
         
     def start(self, mot, ir1, ir2):
         model = tf.keras.models.load_model('/home/pi/workspace/ai-contents-maze-runner/model/model.h5')
