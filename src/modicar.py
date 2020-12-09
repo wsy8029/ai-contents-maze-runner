@@ -98,50 +98,7 @@ class Car(object):
                 elif pred[0] == 5:
                     self.right_fast()
                 
-        
-            
-    def save(self):
-        df = pd.DataFrame(self.data, columns=['ir_L', 'ir_R', 'degree']) 
-        self.path = '/home/pi/workspace/ai-contents-maze-runner/data/data.csv'
-        if not os.path.exists(self.path):
-            df.to_csv(self.path, index=False, mode='a')
-        else:
-            df.to_csv(self.path, index=False, mode='a', header=False)
-        #df.to_csv(self.path, sep=',')
-        time.sleep(3)
-        
-        
-    def start(self, mot, ir1, ir2):
-        model = tf.keras.models.load_model('/home/pi/workspace/ai-contents-maze-runner/model/model.h5')
-        while True:
-            ir_L = ir1.proximity
-            ir_R = ir2.proximity
-            if ir_L == 0:
-                ir_L = 0.01
-            if ir_R == 0:
-                ir_R = 0.01
-            
-            ir_RL = ir_R - ir_L
-            ir_LR = ir_L / ir_R
-            data = [ir_L, ir_R, ir_RL, ir_LR]
-
-            degree = model.predict([[data]])[0][0]
-            data1 = []
-            data1.append([ir_L, ir_R, degree])
-            df = pd.DataFrame(data1, columns=['ir_L', 'ir_R', 'degree'])
-            df.to_csv('/home/pi/workspace/ai-contents-maze-runner/data/data_inference.csv', index=False, mode='a', header=False)
-
-            if degree > 30:
-                degree += 5
-            else:
-                degree -= 5
-                
-            if degree >= 100:
-                degree = 100
-            if degree <= 0:
-                degree = 0
-            print(degree)
-            self.run(mot, degree)
+    
             
             
     def straight(self):
@@ -182,7 +139,7 @@ def main():
     ir1 = bundle.irs[0]
     ir2 = bundle.irs[1]
     
-    car.start(mot, ir1, ir2)
+
 
 
 if __name__ == "__main__":
