@@ -60,7 +60,7 @@ class Car(object):
                         ir_L = self.ir1.proximity
                         ir_R = self.ir2.proximity
                         tmp = []
-                        tmp.append([ir_L, ir_R, self.degree, datetime.now().time()])
+                        tmp.append([ir1, ir2, self.degree, datetime.now().time()])
                         df = pd.DataFrame(tmp, columns=['ir_L', 'ir_R', 'degree', 'time'])
                         df.to_csv('/home/pi/workspace/ai-contents-maze-runner/data/data_new4.csv', index=False, mode='a', header=False)
 
